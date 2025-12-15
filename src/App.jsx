@@ -66,13 +66,13 @@ function App() {
         >
             <h1>Task Manager</h1>
 
-            <div style={{ marginBottom: "20px" }}>
+            <div className="theme-switcher">
                 <button onClick={() => setTheme("light")}>Light</button>
                 <button onClick={() => setTheme("dark")}>Dark</button>
                 <button onClick={() => setTheme("sand")}>Sandy</button>
             </div>
 
-            <form onSubmit={handleAddTask} style={{marginBottom: "20px"}}>
+            <form onSubmit={handleAddTask}>
                 <input
                     type="text"
                     placeholder="Task Title"

@@ -38,6 +38,12 @@ html, body {
     color: var(--text);
 }
 
+.theme-switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
 .task-card {
     background: var(--card);
     padding: 12px;
@@ -74,6 +80,14 @@ button:hover {
     opacity: 0.9;
 }
 
+.task-card button {
+    background: #dc2626;
+}
+
+.task-card button:hover {
+    opacity: 0.85;
+}
+
 select {
     background: var(--accent);
     color: white;
@@ -96,3 +110,14 @@ input[type="text"] {
     border: 1px solid #ccc;
 }
 
+form {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+h2 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
