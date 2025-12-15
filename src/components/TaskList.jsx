@@ -11,6 +11,7 @@ function TaskList({ tasks, onDelete, onToggle }) {
                     description={task.description}
                     completed={task.completed}
                     priority={task.priority}
+                    dueDate={task.dueDate}
                     onDelete={onDelete}
                     onToggle={onToggle}
                 />

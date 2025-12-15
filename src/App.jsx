@@ -13,6 +13,7 @@ function App() {
     const [ title, setTitle ] = useState("");
     const [ description, setDescription ] = useState("");
     const [ priority, setPriority ] = useState("");
+    const [ dueDate, setDueDate] = useState("");
 
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -30,12 +31,14 @@ function App() {
             title,
             description,
             completed: false,
+            dueDate,
             priority: taskPriority,
         };
 
         setTasks([...tasks, newTask]);
         setTitle("");
         setDescription("");
+        setDueDate("");
         setPriority("");
     }
 
@@ -89,6 +92,13 @@ function App() {
                     required
                 />
                 <br />
+                <input
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                    required
+                />
+                <br />                
                 <select
                     value={priority}
                     onChange={(e) => setPriority(e.target.value)}
