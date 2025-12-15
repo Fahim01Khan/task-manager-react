@@ -6,15 +6,20 @@ function App() {
         const savedTasks = localStorage.getItem("tasks");
         return savedTasks ? JSON.parse(savedTasks) : [];
     });
+    const [ theme, setTheme ] = useState(() => {
+        return localStorage.getItem("theme") || "light";
+    });
 
     const [ title, setTitle ] = useState("");
     const [ description, setDescription ] = useState("");
-    const [ theme, setTheme ] = useState("light");
     const [ priority, setPriority ] = useState("");
 
     useEffect(() => {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+    });
 
     function handleAddTask(e) {
         e.preventDefault();
