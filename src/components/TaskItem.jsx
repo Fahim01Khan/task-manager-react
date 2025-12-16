@@ -8,15 +8,27 @@ function TaskItem({ id, title, description, completed, priority, dueDate, onDele
         })
         : "";
 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const due = dueDate ? new Date(dueDate) : null;
+    if (due) due.setHours(0, 0, 0, 0);
+
     const isOverdue = 
         dueDate && 
         !completed &&
-        new Date(dueDate) < new Date().setHours(0, 0, 0, 0);
+        due < today;
+
+    const isDueToday =
+        dueDate && 
+        !completed &&
+        due.getTime() === today.getTime();
 
     return (
         <div className={`task-card 
                             ${priority === "high" ? "high" : ""}
-                            ${isOverdue ? "overdue" : ""}` 
+                            ${isOverdue ? "overdue" : ""} 
+                            ${isDueToday ? "due-today" : ""}`
                         } 
             style={{ opacity: completed ? 0.6 : 1, }}>
             
