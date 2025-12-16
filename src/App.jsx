@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import TaskList from "./components/TaskList";
+import Calendar from "./components/Calendar";
 
 function App() {
     const [tasks, setTasks] = useState (() => {
@@ -124,6 +125,10 @@ function App() {
                 onDelete={handleDeleteTask} 
                 onToggle={handleToggleComplete}
             />
+
+            <h2>Calendar</h2>
+            <Calendar tasks={tasks} />
+
         </div>
     );
 }

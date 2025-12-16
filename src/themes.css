@@ -135,3 +135,47 @@ h2 {
     margin-top: 32px;
     margin-bottom: 12px;
 }
+
+.calendar {
+    margin-top: 30ox;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day {
+    background: var(--card);
+    padding: 8px;
+    min-height: 80px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.calendar-day.header {
+    background: none;
+    font-weight: bold;
+    text-align: center;
+}
+
+.date-number {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.calendar-task {
+    background: var(--accent);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-size: 0.75rem;
+}
+
+.calendar-task.done {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
