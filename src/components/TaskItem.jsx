@@ -47,7 +47,9 @@ function TaskItem({ id, title, description, completed, priority, dueDate, onDele
             <p>{description}</p>
 
 
-            <button onClick={() => onDelete(id)}>Delete</button>
+            <button onClick={() => {
+                if (confirm("Delete this task?")) onDelete(id);
+            }}>Delete</button>
 
         </div>
     );

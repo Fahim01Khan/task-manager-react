@@ -1,6 +1,9 @@
 import TaskItem from "./TaskItem";
+import Spinner from "./Spinner";
+import { useToast } from "./ToastProvider";
 
 function TaskList({ tasks, onDelete, onToggle }) {
+    const { showToast } = useToast();
     return (
         <div>
             {tasks.map(task => (
@@ -12,8 +15,8 @@ function TaskList({ tasks, onDelete, onToggle }) {
                     completed={task.completed}
                     priority={task.priority}
                     dueDate={task.dueDate}
-                    onDelete={onDelete}
-                    onToggle={onToggle}
+                    onDelete={(id) => { onDelete(id); showToast("Deleted task", "success"); }}
+                    onToggle={(id) => { onToggle(id); showToast("Updated task", "success"); }}
                 />
             ))}
         </div>

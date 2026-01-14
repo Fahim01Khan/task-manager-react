@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import api from "./api/axios";
 import TaskList from "./components/TaskList";
 import Calendar from "./components/Calendar";
+import Login from "./components/Login";
+import ServiceLogs from "./components/ServiceLogs";
+import { ToastProvider } from "./components/ToastProvider";
 
 function App() {
     const [tasks, setTasks] = useState (() => {
@@ -22,6 +26,20 @@ function App() {
     useEffect(() => {
         localStorage.setItem("theme", theme);
     });
+
+    const [backendStatus, setBackendStatus] = useState("checking...");
+    const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem("accessToken"));
+    useEffect(() => {
+        let mounted = true;
+        api.get("health/")
+            .then(() => {
+                if (mounted) setBackendStatus("online");
+            })
+            .catch(() => {
+                if (mounted) setBackendStatus("offline");
+            });
+        return () => { mounted = false; };
+    }, []);
 
     function handleAddTask(e) {
         e.preventDefault();
@@ -64,11 +82,25 @@ function App() {
     );
 
     return (
+        <ToastProvider>
         <div
             className="app" 
             data-theme={theme}
         >
             <h1>Task Manager</h1>
+            <p>Backend: {backendStatus}</p>
+
+            {!isAuthenticated ? (
+                <Login onSuccess={() => setIsAuthenticated(true)} />
+            ) : (
+                <div style={{ marginBottom: 16 }}>
+                    <button onClick={() => {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("refreshToken");
+                        setIsAuthenticated(false);
+                    }}>Logout</button>
+                </div>
+            )}
 
             <div className="theme-switcher">
                 <button onClick={() => setTheme("light")}>Light</button>
@@ -129,7 +161,10 @@ function App() {
             <h2>Calendar</h2>
             <Calendar tasks={tasks} />
 
+            {isAuthenticated && <ServiceLogs />}
+
         </div>
+        </ToastProvider>
     );
 }
 
